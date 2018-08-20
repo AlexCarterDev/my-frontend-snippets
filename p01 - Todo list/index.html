@@ -4,22 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Todo list</title>
-    
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" ref="stylesheet">
     <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 
 <body>
-    <div class="todo">
-        <div class="todo-header">
-            <div class="todo-header-left">Todo list</div>
-            <div class="todo-header-right">
-                <span class="todo-percentage">30%</span>
-                <i class="material-icons">settings</i>
-            </div>
-        </div>
-        
-    </div>
+    <ul class="todo box-shadow">
+        <li class="title">
+            <span class="name">Todo list</span>
+            <span class="right-container">
+                <span class="percentage">30%</span>
+            <i class="material-icons settings">settings</i>
+            </span>
+        </li>
+        <li class="task">
+            <i class="material-icons">drag_indicator</i>
+            <i class="material-icons">check_box_outline_blank</i>
+            <span class="description">Feed my cat</span>
+            <i class="material-icons remove-btn">remove_circle</i>
+        </li>
+        <li class="task">
+            <i class="material-icons">drag_indicator</i>
+            <i class="material-icons">check_box_outline_blank</i>
+            <span class="description">Learn english</span>
+            <i class="material-icons remove-btn">remove_circle</i>
+        </li>
+        <li class="create">
+            <i class="material-icons">add</i>
+            <span class="new-task">New task</span>
+        </li>
+        <li class="bottom"></li>
+    </ul>
 </body>
 
 </html>
