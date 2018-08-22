@@ -1,9 +1,10 @@
-var taskList = document.querySelector(".todo .task-container");
-
 var CLS_MATERIAL_ICONS = "material-icons";
 var CLS_DESCRIPTION = "description";
 var CLS_BTN_REMOVE = "btn-remove";
 var CLS_TASK = "task";
+
+var taskList = document.querySelector(".todo .task-container");
+
 
 function createNewTask(text) {
     var task = document.createElement("li");
@@ -24,6 +25,9 @@ function createNewTask(text) {
     var removeBtn = document.createElement("i");
     removeBtn.className = CLS_MATERIAL_ICONS + " " + CLS_BTN_REMOVE;
     removeBtn.innerHTML = "remove_circle";
+    removeBtn.onclick = function() {
+        task.parentElement.removeChild(task);
+    };
 
     task.appendChild(dragBtn);
     task.appendChild(checkBox);
@@ -32,6 +36,7 @@ function createNewTask(text) {
     
     taskList.appendChild(task);
 }
+
 
 createNewTask("Feed my cat");
 createNewTask("Learn english");
