@@ -35,5 +35,6 @@ function createNewTask(text) {
 
 createNewTask("Feed my cat");
 createNewTask("Learn english");
+createNewTask("Clean room");
 
 

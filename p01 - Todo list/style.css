@@ -24,21 +24,6 @@ body {
     background-image: linear-gradient(170deg, red, #ffe933);
     color: white;
 }
-.todo .right-container {
-    float: right;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-.todo .right-container .percentage {
-    padding-right: 0.5em;
-}
-.todo .right-container .settings {
-    font-size: 1.5em;
-}
-.todo .right-container .settings:hover {
-    cursor: pointer;
-}
 
 /* Task */
 .todo .task {
