@@ -7,6 +7,15 @@ body {
   box-shadow: 0 0 100px -20px rgba(0,0,0,.3);
 }
 
+/* Utiliy functinos */
+.unselectable {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
 .todo {
     font-size: 10px;
     background: white;
