@@ -49,15 +49,14 @@ body {
     border-bottom: 1px solid rgba(0,0,0,.1);
     transition: .3s;
 }
-.todo .task:hover {
-    background: #f8f8f8;
+.todo .task .material-icons:hover {
     cursor: pointer;
 }
 .todo .task .material-icons {
     font-size: 2em;
     padding: 0 3px;
 }
-.todo .remove-btn {
+.todo .btn-remove {
     color: #888;
 }
 .todo .description {
@@ -74,6 +73,9 @@ body {
     align-items: center;
     justify-content: center;
     color: #a4a4a4;
+}
+.todo .create .material-icons {
+    cursor: pointer;
 }
 .todo .create .material-icons {
     font-size: 2em;
