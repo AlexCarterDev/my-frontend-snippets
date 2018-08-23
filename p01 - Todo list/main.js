@@ -8,6 +8,7 @@ var CLS_BTN_DRAG = "btn-drag";
 
 var taskList = document.querySelector(".todo .task-container");
 var percentage = document.querySelector(".todo .percentage");
+var newTask = document.querySelector(".todo .new-task");
 
 function updatePercentage() {
     var nChilds = taskList.childElementCount;
@@ -72,6 +73,7 @@ function createNewTask(text) {
     
     taskList.appendChild(task);
 }
+
 
 createNewTask("Feed my cat");
 createNewTask("Learn english");
