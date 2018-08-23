@@ -54,6 +54,7 @@ function createNewTask(text) {
     var descr = document.createElement("span");
     descr.className = CLS_DESCRIPTION;
     descr.innerHTML = text;
+    descr.setAttribute("contenteditable", "true");
 
     var removeBtn = document.createElement("i");
     removeBtn.className = CLS_MATERIAL_ICONS + " " + CLS_BTN_REMOVE + " " + CLS_UNSELECTABLE;
