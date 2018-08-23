@@ -41,8 +41,24 @@ body {
     display: flex;
     align-items: center;
     border-bottom: 1px solid rgba(0,0,0,.1);
-    transition: .3s;
 }
+.todo .btn-remove {
+    color: #888;
+    visibility: hidden;
+}
+.todo .task:hover > .btn-remove {
+    visibility: visible;
+}
+.todo .description:focus + .btn-remove{
+    visibility: visible;
+}
+.todo .btn-drag {
+    visibility: hidden;
+}
+.todo .task:hover > .btn-drag {
+    visibility: visible;
+}
+
 .todo .task .material-icons:hover {
     cursor: pointer;
 }
@@ -50,9 +66,7 @@ body {
     font-size: 2em;
     padding: 0 3px;
 }
-.todo .btn-remove {
-    color: #888;
-}
+
 .todo .description {
     flex-grow: 1;
     font-size: 1.7em;

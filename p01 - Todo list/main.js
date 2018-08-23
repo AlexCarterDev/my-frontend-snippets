@@ -4,6 +4,7 @@ var CLS_BTN_REMOVE = "btn-remove";
 var CLS_TASK = "task";
 var CLS_UNSELECTABLE = "unselectable";
 var CLS_CHECKBOX = "checkbox";
+var CLS_BTN_DRAG = "btn-drag";
 
 var taskList = document.querySelector(".todo .task-container");
 var percentage = document.querySelector(".todo .percentage");
@@ -38,7 +39,7 @@ function createNewTask(text) {
     task.className = CLS_TASK;
 
     var dragBtn = document.createElement("i");
-    dragBtn.className = CLS_MATERIAL_ICONS + " " + CLS_UNSELECTABLE;
+    dragBtn.className = CLS_MATERIAL_ICONS + " " + CLS_UNSELECTABLE + " " + CLS_BTN_DRAG;
     dragBtn.innerHTML = "drag_indicator";
 
     var checkBox = document.createElement("i");
