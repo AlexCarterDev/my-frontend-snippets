@@ -1,13 +1,14 @@
-var CLS_MATERIAL_ICONS = "material-icons";
-var CLS_DESCRIPTION = "description";
-var CLS_BTN_REMOVE = "btn-remove";
-var CLS_TASK = "task";
-var CLS_UNSELECTABLE = "unselectable";
-var CLS_CHECKBOX = "checkbox";
-var CLS_BTN_DRAG = "btn-drag";
+const CLS_MATERIAL_ICONS = "material-icons";
+const CLS_DESCRIPTION = "description";
+const CLS_BTN_REMOVE = "btn-remove";
+const CLS_TASK = "task";
+const CLS_UNSELECTABLE = "unselectable";
+const CLS_CHECKBOX = "checkbox";
+const CLS_BTN_DRAG = "btn-drag";
 
 // KC - KeyCode
-var KC_BACKSPACE = 8;
+const KC_BACKSPACE = 8;
+const KC_ENTER = 13;
 
 var taskList = document.querySelector(".todo .task-container");
 var percentage = document.querySelector(".todo .percentage");
@@ -100,6 +101,12 @@ function createNewTask(text) {
             /* Do not delete last character from selected task */
             return false;
         }
+
+        if ((e.keyCode === KC_ENTER) & (e.shiftKey === false)) {
+            let task = createNewTask("");
+            e.target.parentElement.after(task);
+            task.getElementsByClassName(CLS_DESCRIPTION)[0].focus();
+        }
     }
 
     var removeBtn = document.createElement("i");
@@ -114,19 +121,29 @@ function createNewTask(text) {
     task.appendChild(descr);
     task.appendChild(removeBtn);
     
-    taskList.appendChild(task);
+    return task;
 }
 
 
 newTask.onkeydown = function(e) {
+    var keyCodeIsSpecial = e.keyCode <= 47 | e.keyCode === 91 | e.keyCode === 144 | e.keyCode === 145;
+
     if ((e.keyCode === KC_BACKSPACE) && (e.target.value === "")) {
         focusOnLastDescr(taskList);
         return false;
+    } else if (!keyCodeIsSpecial){
+        let task = createNewTask("");
+        taskList.lastChild.after(task);
+        task.getElementsByClassName(CLS_DESCRIPTION)[0].focus();
     }
 }
 
-createNewTask("Feed my cat");
-createNewTask("Learn english");
-createNewTask("Clean room");
+var task1 = createNewTask("Feed my cat");
+var task2 = createNewTask("Learn english");
+var task3 = createNewTask("Clean room");
+
+taskList.appendChild(task1);
+taskList.appendChild(task2);
+taskList.appendChild(task3);
 
 updatePercentage();
