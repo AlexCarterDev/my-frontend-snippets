@@ -10,35 +10,40 @@ const CLS_BTN_DRAG = "btn-drag";
 const KC_BACKSPACE = 8;
 const KC_ENTER = 13;
 
-const DESCR_POS = 2;
+const POS_DESCR = 2;
+const POS_CHECKBOX = 1;
 
 var taskList = document.querySelector(".todo .task-container");
 var percentage = document.querySelector(".todo .percentage");
 var newTask = document.querySelector(".todo .new-task");
 
 function updatePercentage() {
-    var nChilds = taskList.childElementCount;
-    var nCheck = 0;
-    var checkBoxes = taskList.getElementsByClassName(CLS_CHECKBOX);
-    
-    for (let i = 0; i < checkBoxes.length; i++) {
-        var cb = checkBoxes[i];
-        nCheck += cb.state;
+    var taskCount = taskList.children.length;
+    var completedTaskCount = 0;
+
+    for (let i = 0; i < taskCount; i++) {
+        var cb = taskList.children[i].children[POS_CHECKBOX];
+        completedTaskCount += cb.state;
     }
     
-    if (nChilds == 0) {
+    if (taskCount == 0) {
         percentage.innerHTML = "";
     } else {
-        percentage.innerHTML = Math.round((nCheck/nChilds)*100) + "%";
+        percentage.innerHTML = Math.round((completedTaskCount/taskCount)*100) + "%";
     }
 }
 
-function updateCheckBoxUI(checkBox) {
-    if (checkBox.state == 1) {
+function setCheckBoxState(checkBox, isDone) {
+    checkBox.state = isDone;
+    if (isDone) {
         checkBox.innerHTML = "check_box";
     } else {
         checkBox.innerHTML = "check_box_outline_blank";
     }
+}
+
+function getCheckBoxState(checkBox) {
+    return checkBox.state;
 }
 
 function removeTask(task) {
@@ -66,16 +71,17 @@ function moveCursorToEnd(el) {
 }
 
 function focusOnLastDescr(taskList) {
-    if (taskList.childElementCount > 0) {
-        var lastDescr = taskList.lastChild.getElementsByClassName(CLS_DESCRIPTION)[0];
+    if (taskList.children.length > 0) {
+        var lastDescr = taskList.lastChild.children[POS_DESCR];
         moveCursorToEnd(lastDescr);
-    } else {
-        newTask.focus();
-    }            
+    }    
 }
 
-function focusOnPrevDescr(taskList) {
-
+function focusOnPrevDescr(task) {
+    if (task.previousSibling !== null) {
+        var prev = task.previousSibling.children[POS_DESCR];
+        moveCursorToEnd(prev);
+    }
 }
 
 function createNewTask(text) {
@@ -87,12 +93,10 @@ function createNewTask(text) {
     dragBtn.innerHTML = "drag_indicator";
 
     var checkBox = document.createElement("i");
-    checkBox.state = 0; // add new feature: checkbox checked or not
-    updateCheckBoxUI(checkBox);
+    setCheckBoxState(checkBox, false);
     checkBox.className = CLS_MATERIAL_ICONS + " " + CLS_UNSELECTABLE + " " + CLS_CHECKBOX;
     checkBox.onclick = function() {
-        checkBox.state = checkBox.state ? 0 : 1;
-        updateCheckBoxUI(checkBox);
+        setCheckBoxState(checkBox, !getCheckBoxState(checkBox));
         updatePercentage();
     };
 
@@ -102,21 +106,18 @@ function createNewTask(text) {
     descr.setAttribute("contenteditable", "true");
     descr.onkeydown = function(e) {
         if ((e.keyCode === KC_BACKSPACE) && (e.target.textContent === "")) {
-            console.log(task.previousSibling)
             if (task.previousSibling !== null) {
-                var prev = task.previousSibling.getElementsByClassName(CLS_DESCRIPTION)[0];                
-                moveCursorToEnd(prev);
+                focusOnPrevDescr(task);
                 removeTask(task);
             }
-            
             /* Do not delete last character from selected task */
             return false;
         }
 
         if ((e.keyCode === KC_ENTER) & (e.shiftKey === false)) {
-            let task = createNewTask("");
-            e.target.parentElement.after(task);
-            task.getElementsByClassName(CLS_DESCRIPTION)[0].focus();
+            let t = createNewTask("");
+            task.after(t);
+            t.getElementsByClassName(CLS_DESCRIPTION)[0].focus();
         }
     }
 
@@ -144,12 +145,12 @@ newTask.onkeydown = function(e) {
         return false;
     } else if (!keyCodeIsSpecial){
         let task = createNewTask("");
-        if (taskList.childElementCount === 0) {
+        if (taskList.children.length === 0) {
             taskList.appendChild(task);
         } else {
             taskList.lastChild.after(task);
         }
-        task.getElementsByClassName(CLS_DESCRIPTION)[0].focus();
+        task.children[POS_DESCR].focus();
     }
 }
 
