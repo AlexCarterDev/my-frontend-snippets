@@ -10,6 +10,8 @@ const CLS_BTN_DRAG = "btn-drag";
 const KC_BACKSPACE = 8;
 const KC_ENTER = 13;
 
+const DESCR_POS = 2;
+
 var taskList = document.querySelector(".todo .task-container");
 var percentage = document.querySelector(".todo .percentage");
 var newTask = document.querySelector(".todo .new-task");
@@ -72,6 +74,10 @@ function focusOnLastDescr(taskList) {
     }            
 }
 
+function focusOnPrevDescr(taskList) {
+
+}
+
 function createNewTask(text) {
     var task = document.createElement("li");
     task.className = CLS_TASK;
@@ -96,8 +102,13 @@ function createNewTask(text) {
     descr.setAttribute("contenteditable", "true");
     descr.onkeydown = function(e) {
         if ((e.keyCode === KC_BACKSPACE) && (e.target.textContent === "")) {
-            removeTask(task);
-            focusOnLastDescr(taskList);
+            console.log(task.previousSibling)
+            if (task.previousSibling !== null) {
+                var prev = task.previousSibling.getElementsByClassName(CLS_DESCRIPTION)[0];                
+                moveCursorToEnd(prev);
+                removeTask(task);
+            }
+            
             /* Do not delete last character from selected task */
             return false;
         }
@@ -133,7 +144,11 @@ newTask.onkeydown = function(e) {
         return false;
     } else if (!keyCodeIsSpecial){
         let task = createNewTask("");
-        taskList.lastChild.after(task);
+        if (taskList.childElementCount === 0) {
+            taskList.appendChild(task);
+        } else {
+            taskList.lastChild.after(task);
+        }
         task.getElementsByClassName(CLS_DESCRIPTION)[0].focus();
     }
 }
