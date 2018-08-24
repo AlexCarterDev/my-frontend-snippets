@@ -62,6 +62,15 @@ function moveCursorToEnd(el) {
     }
 }
 
+function focusOnLastDescr(taskList) {
+    if (taskList.childElementCount > 0) {
+        var lastDescr = taskList.lastChild.getElementsByClassName(CLS_DESCRIPTION)[0];
+        moveCursorToEnd(lastDescr);
+    } else {
+        newTask.focus();
+    }            
+}
+
 function createNewTask(text) {
     var task = document.createElement("li");
     task.className = CLS_TASK;
@@ -87,14 +96,9 @@ function createNewTask(text) {
     descr.onkeydown = function(e) {
         if ((e.keyCode === KC_BACKSPACE) && (e.target.textContent === "")) {
             removeTask(task);
-            if (taskList.childElementCount > 0) {
-                var lastDescr = taskList.lastChild.getElementsByClassName(CLS_DESCRIPTION)[0];
-                moveCursorToEnd(lastDescr);
-                /* Do not delete last character from selected task */
-                return false;
-            } else {
-                newTask.focus();
-            }            
+            focusOnLastDescr(taskList);
+            /* Do not delete last character from selected task */
+            return false;
         }
     }
 
@@ -113,6 +117,13 @@ function createNewTask(text) {
     taskList.appendChild(task);
 }
 
+
+newTask.onkeydown = function(e) {
+    if ((e.keyCode === KC_BACKSPACE) && (e.target.value === "")) {
+        focusOnLastDescr(taskList);
+        return false;
+    }
+}
 
 createNewTask("Feed my cat");
 createNewTask("Learn english");
