@@ -118,6 +118,7 @@ function createNewTask(text) {
             let t = createNewTask("");
             task.after(t);
             t.getElementsByClassName(CLS_DESCRIPTION)[0].focus();
+            updatePercentage();
         }
     }
 
@@ -151,6 +152,7 @@ newTask.onkeydown = function(e) {
             taskList.lastChild.after(task);
         }
         task.children[POS_DESCR].focus();
+        updatePercentage();
     }
 }
 
