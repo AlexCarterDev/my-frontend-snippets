@@ -109,7 +109,8 @@ function createNewTask(text) {
     descr.innerHTML = text;
     descr.setAttribute("contenteditable", "true");
     descr.onkeydown = function(e) {
-        if ((e.keyCode === KC_BACKSPACE) && (e.target.textContent === "")) {
+        console.log(e.target.textContent);
+        if ((e.keyCode === KC_BACKSPACE) && ((e.target.innerHTML === "<br>") || (e.target.innerText.length === 0))) {
             if (task.previousSibling !== null) {
                 focusOnPrevDescr(task);
                 removeTask(task);
