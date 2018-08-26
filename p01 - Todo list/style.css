@@ -8,6 +8,11 @@ body {
   box-shadow: 0 0 100px -20px rgba(0,0,0,.3);
 }
 
+.container {
+    margin: 0 auto;
+    max-width: 600px;
+}
+
 /* Utiliy functinos */
 .unselectable {
     -moz-user-select: -moz-none;
