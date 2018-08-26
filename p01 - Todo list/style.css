@@ -37,7 +37,6 @@ body {
 
 /* Task */
 .todo .task {
-    padding: 1.2em;
     padding-left: 0.5em;
     display: flex;
     align-items: center;
@@ -68,6 +67,7 @@ body {
 }
 
 .todo .description {
+    padding: 0.5em 0; 
     flex-grow: 1;
     font-size: 1.7em;
     margin-left: 0.5em;
@@ -83,7 +83,6 @@ body {
 
 /* Create button */
 .todo .create {
-    padding: 1em;
     padding-left: 0.5em;
     display: flex;
     align-items: center;
@@ -103,6 +102,7 @@ body {
 }
 
 .todo .new-task {
+    padding: .5em 0;
     font-family: Arial, Helvetica, sans-serif;
     border: none;
 }
