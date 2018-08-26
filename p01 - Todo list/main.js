@@ -182,3 +182,18 @@ taskList.appendChild(task2);
 taskList.appendChild(task3);
 
 updatePercentage();
+
+var sortable = Sortable.create(taskList, {
+    handle: ".btn-drag",
+    animation: 50, 
+    chosenClass: "todo-chosen-task",
+    ghostClass: "todo-ghost-task",
+});
+/*
+var sortable = Sortable.create(sortableList, {
+    handle: ".drag-handle",
+    animation: 150,
+    ghostClass: "ghost",
+    chosenClass: "chosen",
+});
+*/

@@ -29,6 +29,12 @@ body {
     padding: 0;
     margin: 0;
 }
+
+/* Soratble */
+.todo-chosen-task {
+    background: #f6f6f6;
+}
+
 /* Title */
 .todo .title {
     font-size: 2em;
