@@ -9,6 +9,10 @@ const CLS_BTN_DRAG = "btn-drag";
 // KC - KeyCode
 const KC_BACKSPACE = 8;
 const KC_ENTER = 13;
+const KC_UP = 38;
+const KC_DOWN = 40;
+const KS_LEFT = 37;
+const KS_RIGHT = 39;
 
 const POS_DESCR = 2;
 const POS_CHECKBOX = 1;
@@ -119,7 +123,19 @@ function createNewTask(text) {
             task.after(t);
             t.getElementsByClassName(CLS_DESCRIPTION)[0].focus();
             updatePercentage();
+            return true;
         }
+
+        if ((task.previousSibling !== null) && (e.keyCode === KC_UP)) {
+                task.previousSibling.children[POS_DESCR].focus();
+                return false;
+        }
+
+        if ((task.nextSibling !== null) && (e.keyCode === KC_DOWN)) {
+                task.nextSibling.children[POS_DESCR].focus();
+                return false;
+        }
+
     }
 
     var removeBtn = document.createElement("i");
