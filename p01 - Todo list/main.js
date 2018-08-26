@@ -127,12 +127,12 @@ function createNewTask(text) {
             return true;
         }
 
-        if ((task.previousSibling !== null) && (e.keyCode === KC_UP)) {
+        if ((task.previousSibling !== null) && (e.keyCode === KC_UP) && (e.shiftKey === false)) {
                 task.previousSibling.children[POS_DESCR].focus();
                 return false;
         }
 
-        if ((task.nextSibling !== null) && (e.keyCode === KC_DOWN)) {
+        if ((task.nextSibling !== null) && (e.keyCode === KC_DOWN) && (e.shiftKey === false)) {
                 task.nextSibling.children[POS_DESCR].focus();
                 return false;
         }
