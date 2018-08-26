@@ -72,9 +72,17 @@ body {
 .todo .task .material-icons:hover {
     cursor: pointer;
 }
-.todo .task .material-icons {
+.todo .task .btn-drag {
     font-size: 2em;
-    padding: 0 3px;
+    padding: .4em 0px;
+}
+.todo .task .checkbox {
+    font-size: 2em;
+    padding: .4em .2em .4em .1em;
+}
+.todo .task .btn-remove {
+    font-size: 2em;
+    padding: .4em;
 }
 
 .todo .description {
@@ -100,9 +108,7 @@ body {
     justify-content: center;
     color: #a4a4a4;
 }
-.todo .create .material-icons {
-    cursor: pointer;
-}
+
 .todo .create .material-icons {
     font-size: 2em;
     padding: 0 3px;
