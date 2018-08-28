@@ -21,6 +21,31 @@ var taskList = document.querySelector(".todo .task-container");
 var percentage = document.querySelector(".todo .percentage");
 var newTask = document.querySelector(".todo .new-task");
 
+function load() {
+    var aTasks = [];
+    var loadedString = localStorage.getItem("tasks");
+    console.log(loadedString);
+
+    if (loadedString != null) {
+        aTasks = JSON.parse(loadedString);
+
+        console.log(aTasks);
+        for (let i = 0; i < aTasks.length; i++) {
+            var task = createNewTask(aTasks[i]);
+            taskList.appendChild(task);
+        }
+    }
+}
+
+function save() {
+    var aTasks = [];    
+    for (let i = 0; i < taskList.children.length; i++) {
+        aTasks[i] = taskList.children[i].children[POS_DESCR].textContent;
+    }
+
+    localStorage.setItem("tasks", JSON.stringify(aTasks));
+}
+
 function updatePercentage() {
     var taskCount = taskList.children.length;
     var completedTaskCount = 0;
@@ -109,7 +134,6 @@ function createNewTask(text) {
     descr.innerHTML = text;
     descr.setAttribute("contenteditable", "true");
     descr.onkeydown = function(e) {
-        console.log(e.target.textContent);
         if ((e.keyCode === KC_BACKSPACE) && ((e.target.innerHTML === "<br>") || (e.target.innerText.length === 0))) {
             if (task.previousSibling !== null) {
                 focusOnPrevDescr(task);
@@ -136,7 +160,6 @@ function createNewTask(text) {
                 task.nextSibling.children[POS_DESCR].focus();
                 return false;
         }
-
     }
 
     var removeBtn = document.createElement("i");
@@ -156,6 +179,7 @@ function createNewTask(text) {
 
 
 newTask.onkeydown = function(e) {
+    // Enter, Shift, Backspace, Up etc 
     var keyCodeIsSpecial = e.keyCode <= 47 | e.keyCode === 91 | e.keyCode === 144 | e.keyCode === 145;
 
     if ((e.keyCode === KC_BACKSPACE) && (e.target.value === "")) {
@@ -173,27 +197,37 @@ newTask.onkeydown = function(e) {
     }
 }
 
-var task1 = createNewTask("Feed my cat");
-var task2 = createNewTask("Learn english");
-var task3 = createNewTask("Clean room");
 
-taskList.appendChild(task1);
-taskList.appendChild(task2);
-taskList.appendChild(task3);
+var firstStart = 
+    (localStorage.getItem("first_start") === null) || 
+    (localStorage.getItem("first_start") === "true");
+
+console.log(firstStart);
+
+if (firstStart) {
+    var task1 = createNewTask("Feed my cat");
+    var task2 = createNewTask("Learn english");
+    var task3 = createNewTask("Clean room");
+
+    taskList.appendChild(task1);
+    taskList.appendChild(task2);
+    taskList.appendChild(task3);
+    
+    save();
+    localStorage.setItem("first_start", "false");
+} else {
+    load();
+}
+
+window.addEventListener('beforeunload', function(event) {
+    save();
+  }, false);
 
 updatePercentage();
 
 var sortable = Sortable.create(taskList, {
     handle: ".btn-drag",
-    animation: 50, 
+    animation: 100, 
     chosenClass: "todo-chosen-task",
     ghostClass: "todo-ghost-task",
 });
-/*
-var sortable = Sortable.create(sortableList, {
-    handle: ".drag-handle",
-    animation: 150,
-    ghostClass: "ghost",
-    chosenClass: "chosen",
-});
-*/
