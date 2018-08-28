@@ -24,14 +24,14 @@ var newTask = document.querySelector(".todo .new-task");
 function load() {
     var aTasks = [];
     var loadedString = localStorage.getItem("tasks");
-    console.log(loadedString);
 
     if (loadedString != null) {
         aTasks = JSON.parse(loadedString);
 
-        console.log(aTasks);
         for (let i = 0; i < aTasks.length; i++) {
-            var task = createNewTask(aTasks[i]);
+            var descr = aTasks[i].description;
+            var isComplete = aTasks[i].isComplete;
+            var task = createNewTask(descr, isComplete);
             taskList.appendChild(task);
         }
     }
@@ -40,7 +40,10 @@ function load() {
 function save() {
     var aTasks = [];    
     for (let i = 0; i < taskList.children.length; i++) {
-        aTasks[i] = taskList.children[i].children[POS_DESCR].textContent;
+        aTasks[i] = {
+            description: taskList.children[i].children[POS_DESCR].textContent,
+            isComplete: taskList.children[i].children[POS_CHECKBOX].state
+        };
     }
 
     localStorage.setItem("tasks", JSON.stringify(aTasks));
@@ -122,7 +125,7 @@ function focusOnPrevDescr(task) {
     }
 }
 
-function createNewTask(text) {
+function createNewTask(text, isComplete) {
     var task = document.createElement("li");
     task.className = CLS_TASK;
 
@@ -131,7 +134,7 @@ function createNewTask(text) {
     dragBtn.innerHTML = "drag_indicator";
 
     var checkBox = document.createElement("i");
-    setCheckBoxState(checkBox, false);
+    setCheckBoxState(checkBox, isComplete);
     checkBox.className = CLS_MATERIAL_ICONS + " " + CLS_UNSELECTABLE + " " + CLS_CHECKBOX;
     checkBox.onclick = function() {
         setCheckBoxState(checkBox, !getCheckBoxState(checkBox));
@@ -154,7 +157,7 @@ function createNewTask(text) {
         }
 
         if ((e.keyCode === KC_ENTER) & (e.shiftKey === false)) {
-            let t = createNewTask("");
+            let t = createNewTask("", false);
             task.after(t);
             t.getElementsByClassName(CLS_DESCRIPTION)[0].focus();
             updatePercentage();
@@ -184,6 +187,8 @@ function createNewTask(text) {
     task.appendChild(descr);
     task.appendChild(removeBtn);
     
+    updateStyle(task);
+
     return task;
 }
 
@@ -196,7 +201,7 @@ newTask.onkeydown = function(e) {
         focusOnLastDescr(taskList);
         return false;
     } else if (!keyCodeIsSpecial){
-        let task = createNewTask("");
+        let task = createNewTask("", false);
         if (taskList.children.length === 0) {
             taskList.appendChild(task);
         } else {
@@ -212,12 +217,10 @@ var firstStart =
     (localStorage.getItem("first_start") === null) || 
     (localStorage.getItem("first_start") === "true");
 
-console.log(firstStart);
-
 if (firstStart) {
-    var task1 = createNewTask("Feed my cat");
-    var task2 = createNewTask("Learn english");
-    var task3 = createNewTask("Clean room");
+    var task1 = createNewTask("Feed my cat", false);
+    var task2 = createNewTask("Learn english", false);
+    var task3 = createNewTask("Clean room", false);
 
     taskList.appendChild(task1);
     taskList.appendChild(task2);
