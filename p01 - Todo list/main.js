@@ -41,7 +41,7 @@ function save() {
     var aTasks = [];    
     for (let i = 0; i < taskList.children.length; i++) {
         aTasks[i] = {
-            description: taskList.children[i].children[POS_DESCR].textContent,
+            description: taskList.children[i].children[POS_DESCR].innerHTML,
             isComplete: taskList.children[i].children[POS_CHECKBOX].state
         };
     }
