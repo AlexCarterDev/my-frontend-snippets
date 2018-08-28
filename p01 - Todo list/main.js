@@ -148,7 +148,7 @@ function createNewTask(text) {
             task.after(t);
             t.getElementsByClassName(CLS_DESCRIPTION)[0].focus();
             updatePercentage();
-            return true;
+            return false;
         }
 
         if ((task.previousSibling !== null) && (e.keyCode === KC_UP) && (e.shiftKey === false)) {
