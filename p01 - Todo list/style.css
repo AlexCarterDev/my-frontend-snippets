@@ -94,6 +94,7 @@ body {
     word-wrap: break-word;
     /* Do not allow content go to outside  */
     overflow: hidden;
+    outline: 0px solid transparent;
 }
 /* Prevent height of element from collapsing to 0 when content is empty. */
 .todo .description:empty::before {
