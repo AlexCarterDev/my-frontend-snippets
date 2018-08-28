@@ -53,6 +53,11 @@ body {
     align-items: center;
     border-bottom: 1px solid rgba(0,0,0,.1);
 }
+.todo .completed {
+    color: #aaa;
+    font-style: italic;
+}
+
 .todo .btn-remove {
     color: #888;
     visibility: hidden;
@@ -64,6 +69,7 @@ body {
     visibility: visible;
 }
 .todo .btn-drag {
+    color: black;
     visibility: hidden;
 }
 .todo .task:hover > .btn-drag {

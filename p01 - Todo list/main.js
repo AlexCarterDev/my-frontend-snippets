@@ -71,6 +71,15 @@ function setCheckBoxState(checkBox, isDone) {
     }
 }
 
+
+function updateStyle(task) {
+    if (task.children[POS_CHECKBOX].state) {
+        task.classList.add("completed");
+    } else {
+        task.classList.remove("completed");
+    }
+}
+
 function getCheckBoxState(checkBox) {
     return checkBox.state;
 }
@@ -126,6 +135,7 @@ function createNewTask(text) {
     checkBox.className = CLS_MATERIAL_ICONS + " " + CLS_UNSELECTABLE + " " + CLS_CHECKBOX;
     checkBox.onclick = function() {
         setCheckBoxState(checkBox, !getCheckBoxState(checkBox));
+        updateStyle(task);
         updatePercentage();
     };
 
