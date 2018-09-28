@@ -7,9 +7,8 @@ class Text extends React.Component {
     render() {
         return (
             <p id='text'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Nesciunt quam aliquid nihil eos ea ex porro cupiditate
-                officia
+                Curabitur in tortor mattis, hendrerit quam sit amet, 
+                malesuada velit. Lorem ipsum dolor sit amet, consectetur.
             </p>
         );
     }
@@ -45,6 +44,8 @@ class Buttons extends React.Component {
                 <button id="tumblr-quote">
                     <i className="fab fa-twitter"></i>
                 </button>
+                <div id="buttons-free-space">
+                </div>
                 <button id="new-quote">
                     New quote
                 </button>
