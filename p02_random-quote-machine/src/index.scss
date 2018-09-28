@@ -1,9 +1,22 @@
-$blue-color: blue;
-$black-color: black;
-$white-color: white;
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+}
 
-body {
-    font-size: 30px;
-    background: $black-color;
-    color: $white-color;
+#root {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#quote-box {
+    flex: 0 0 460px;
+    padding: 30px;
+    background: lightgrey;
+    p {
+        margin: 0;
+    }
 }
