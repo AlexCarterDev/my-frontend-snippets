@@ -98,12 +98,14 @@ class QuoteBox extends React.Component {
         this.randomizeColors = this.randomizeColors.bind(this);
     }
     updateQuote(text,author) {
+        console.log('quote-box updateQuote');
         this.setState({
             text: text,
             author: author,
         });
     }
     getRandomQuoteFromApi() {
+        console.log('quote-box getRandomQuoteFromApi');
         this.randomizeColors();
         return fetch('https://talaikis.com/api/quotes/random/')
             .then((response) => response.json())
@@ -114,12 +116,12 @@ class QuoteBox extends React.Component {
             });
     }
     componentDidMount() {
-        this.randomizeColors();
+        console.log('quote-box componentDidMount');        
         this.getRandomQuoteFromApi();
     }
     
     randomizeColors() {
-        // h: 32, s: 5, b: 100
+        console.log('quote-box randomizeColors');
         var hue = getRandomHue();
         document.body.style.backgroundColor = 'hsl(' + hue + ', 100%, 97.5%)';
         // consider opacity
@@ -129,6 +131,7 @@ class QuoteBox extends React.Component {
         });
     }
     render() {
+        console.log('quote-box render');
         return (
             <div id='quote-box'>
                 <Text text={this.state.text}/>
