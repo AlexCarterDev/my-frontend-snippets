@@ -56,7 +56,7 @@ body {
     height: 2px;
     border-radius: 1px;
     background: $author-color;
-    width: 100px;
+    width: 60px;
 }
 
 // Buttons
@@ -75,10 +75,12 @@ body {
     border-radius: $border-radius;
 }
 #tweet-quote, #tumblr-quote {
+    text-align: center;
     width: $button-size;
 }
 #buttons i {
     font-size: 1.3em;
+    line-height: $button-size;
 }
 #new-quote {
     padding-left: $button-size/3;
