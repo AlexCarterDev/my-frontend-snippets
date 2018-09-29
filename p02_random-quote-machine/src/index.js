@@ -65,7 +65,7 @@ class Buttons extends React.Component {
         var tweetUrl = this.getTweetURL(this.props.text, this.props.author);
         var tumblrUrl = this.getTumblrUrl(this.props.text, this.props.author);
         var btnStyle = {
-            background: this.props.btnBackground
+            background: this.props.btnBackground,
         };
         return(
             <div id='buttons'>
@@ -122,7 +122,8 @@ class QuoteBox extends React.Component {
         // h: 32, s: 5, b: 100
         var hue = getRandomHue();
         document.body.style.backgroundColor = 'hsl(' + hue + ', 100%, 97.5%)';
-        var btnBackground = 'hsl(' + hue + ', 100%, 46.5%)';
+        // consider opacity
+        var btnBackground = 'hsl(' + hue + ', 100%, 40%)';
         this.setState({
             btnBackground: btnBackground
         });

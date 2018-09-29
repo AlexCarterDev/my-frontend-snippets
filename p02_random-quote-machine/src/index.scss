@@ -19,6 +19,7 @@ $button-hover-bg: #ffa902;
 
 body {
     background: $app-bg;
+    transition: background-color 0.5s ease;
 }
 #root {
     height: 100vh;
@@ -68,11 +69,14 @@ body {
     flex-grow: 1;
 }
 #new-quote, #tweet-quote, #tumblr-quote {
+    outline: 0;
+    opacity: 0.7;
     color: $button-color;
     height: $button-size;
     background: $button-bg;
     border: none;
     border-radius: $border-radius;
+    transition: background-color 0.5s ease;
 }
 #tweet-quote, #tumblr-quote {
     text-align: center;
@@ -87,7 +91,7 @@ body {
     padding-right: $button-size/3;
 }
 #new-quote:hover, #tweet-quote:hover, #tumblr-quote:hover {
-    background: $button-hover-bg;
+    opacity: 1;
     cursor: pointer;
 }
 #buttons :nth-child(2) {
