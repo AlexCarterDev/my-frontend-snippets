@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 import './index.scss';
 
+function getRandomHue() {
+    return Math.floor(Math.random() * 360);
+}
 
 class Text extends React.Component {
     render() {
@@ -61,17 +64,20 @@ class Buttons extends React.Component {
     render() {
         var tweetUrl = this.getTweetURL(this.props.text, this.props.author);
         var tumblrUrl = this.getTumblrUrl(this.props.text, this.props.author);
+        var btnStyle = {
+            background: this.props.btnBackground
+        };
         return(
             <div id='buttons'>
-                <a id="tweet-quote" href={tweetUrl} target='_blank'>
+                <a id="tweet-quote" href={tweetUrl} target='_blank' style={btnStyle}>
                     <i className="fab fa-twitter"></i>
                 </a>
-                <a id="tumblr-quote" href={tumblrUrl} target='_blank'>
+                <a id="tumblr-quote" href={tumblrUrl} target='_blank' style={btnStyle}>
                     <i className="fab fa-tumblr"></i>
                 </a>
                 <div id="buttons-free-space">
                 </div>
-                <button id="new-quote" onClick={this.props.randomQuote}>
+                <button id="new-quote" onClick={this.props.randomQuote} style={btnStyle}>
                     New quote
                 </button>
             </div>
@@ -84,18 +90,21 @@ class QuoteBox extends React.Component {
         super(props);
         this.state = {
             text: '',
-            author: ''
+            author: '',
+            btnBackground: 'white'
         }
         this.updateQuote = this.updateQuote.bind(this);
         this.getRandomQuoteFromApi = this.getRandomQuoteFromApi.bind(this);
+        this.randomizeColors = this.randomizeColors.bind(this);
     }
     updateQuote(text,author) {
         this.setState({
             text: text,
-            author: author
+            author: author,
         });
     }
     getRandomQuoteFromApi() {
+        this.randomizeColors();
         return fetch('https://talaikis.com/api/quotes/random/')
             .then((response) => response.json())
             .then((json) => {
@@ -105,7 +114,18 @@ class QuoteBox extends React.Component {
             });
     }
     componentDidMount() {
+        this.randomizeColors();
         this.getRandomQuoteFromApi();
+    }
+    
+    randomizeColors() {
+        // h: 32, s: 5, b: 100
+        var hue = getRandomHue();
+        document.body.style.backgroundColor = 'hsl(' + hue + ', 100%, 97.5%)';
+        var btnBackground = 'hsl(' + hue + ', 100%, 46.5%)';
+        this.setState({
+            btnBackground: btnBackground
+        });
     }
     render() {
         return (
@@ -114,7 +134,7 @@ class QuoteBox extends React.Component {
                 <Separator/>
                 <Author author={this.state.author}/>
                 <Buttons text={this.state.text} author={this.state.author}
-                    randomQuote={this.getRandomQuoteFromApi}/>
+                    randomQuote={this.getRandomQuoteFromApi} btnBackground={this.state.btnBackground}/>
             </div>
         );
     }
