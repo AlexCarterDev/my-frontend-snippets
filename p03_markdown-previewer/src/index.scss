@@ -1,5 +1,56 @@
+$app-bg: #565A5C;
+$title-height: 30px;
+$title-color: #ddd;
+$inside-bg: #fff;
+$preview-padding: 15px;
+$markdown-padding-left: 10px;
+
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Cousine', monospace;
+  background: $app-bg;
+}
+
+#markdown {
+  position: fixed;
+  top: 0;
+  left: $markdown-padding-left;
+  right: 50%;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  background: #aaa;
+}
+
+#title {
+  padding-left: 10px;
+  border-bottom: 1px solid $title-color;
+  font-size: 16px;
+  color: $title-color;
+  line-height: $title-height;
+  height: $title-height;
+  background: $inside-bg;
+}
+
+#editor {
+  flex: 1;
+  resize: none;
+  padding: 0.8em;
+  border: none;
+  outline: none;
+}
+
+#preview {
+  border-radius: 5px;
+  outline: none;
+  border: 0;
+  padding: 0.8em;
+  resize: none;
+  min-height: 1000px;
+  box-sizing: border-box;
+  margin: $preview-padding;
+  margin-left: calc(50% + #{$preview-padding});
+  width: calc(50% - 2*#{$preview-padding});
 }
