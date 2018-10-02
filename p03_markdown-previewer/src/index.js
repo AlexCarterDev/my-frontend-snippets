@@ -6,11 +6,12 @@ import './index.scss';
 
 class Preview extends React.Component {
     render() {
+        
         return(
             <textarea 
                 id='preview'
                 readOnly={true}
-                defaultValue='Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis laborum, vel similique quidem repudiandae autem iure? Ipsum, dolorum harum soluta sit illum voluptatum delectus exercitationem impedit odio, quasi a error accusantium dicta, voluptatibus ad aliquid voluptate deserunt recusandae dolores saepe!'
+                defaultValue={'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor, doloremque. Cum commodi unde ad culpa nihil quae. Ab alias iusto cum labore harum, corrupti odit voluptatum in maiores et. Asperiores qui odit explicabo consequatur repellendus unde pariatur in reiciendis commodi?'}
             />
         )
     }
@@ -27,11 +28,48 @@ class Title extends React.Component {
 }
 
 class Editor extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            markdown: '',
+        };
+
+        this.loadDefaultMarkdown = this.loadDefaultMarkdown.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({
+            markdown: event.target.value
+        });
+    }
+
+    loadDefaultMarkdown() {
+        console.log('Editr: start loading default text');
+        const fileUrl = 'markdown-by-default';
+        fetch(fileUrl)
+            .then((r) => r.text())
+            .then((text) => {
+                console.log('Editor: default text loaded');
+                this.setState({markdown: text,});
+            })
+            .catch((e) => console.log(e));
+    }
+
+    componentDidMount() {
+        console.log('Editor: did mount');
+        this.loadDefaultMarkdown();
+    }
+
     render() {
+
+        console.log('Editor: render');
         return (
             <textarea
                 id='editor'
-                defaultValue='Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam accusantium minus odio ratione pariatur illum sed tempora nulla dolor eius praesentium dolorem, provident sint minima qui sequi necessitatibus distinctio quo voluptas inventore? Distinctio et odit consectetur voluptate sequi architecto iure.'
+                value={this.state.markdown}
+                onChange={this.handleChange}
             />
         )
     }
@@ -50,6 +88,7 @@ class Markdown extends React.Component {
 
 class App extends React.Component {
     render() {
+        console.log('App: render')
         return(
             <div>
                 <Markdown />
