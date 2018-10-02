@@ -2,12 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 
+
+
 class Preview extends React.Component {
     render() {
         return(
-            <textarea id='preview' readonly='true'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis laborum, vel similique quidem repudiandae autem iure? Ipsum, dolorum harum soluta sit illum voluptatum delectus exercitationem impedit odio, quasi a error accusantium dicta, voluptatibus ad aliquid voluptate deserunt recusandae dolores saepe!
-            </textarea>
+            <textarea 
+                id='preview'
+                readOnly={true}
+                defaultValue='Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis laborum, vel similique quidem repudiandae autem iure? Ipsum, dolorum harum soluta sit illum voluptatum delectus exercitationem impedit odio, quasi a error accusantium dicta, voluptatibus ad aliquid voluptate deserunt recusandae dolores saepe!'
+            />
         )
     }
 }
@@ -25,9 +29,10 @@ class Title extends React.Component {
 class Editor extends React.Component {
     render() {
         return (
-            <textarea id='editor'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam accusantium minus odio ratione pariatur illum sed tempora nulla dolor eius praesentium dolorem, provident sint minima qui sequi necessitatibus distinctio quo voluptas inventore? Distinctio et odit consectetur voluptate sequi architecto iure.
-            </textarea>
+            <textarea
+                id='editor'
+                defaultValue='Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam accusantium minus odio ratione pariatur illum sed tempora nulla dolor eius praesentium dolorem, provident sint minima qui sequi necessitatibus distinctio quo voluptas inventore? Distinctio et odit consectetur voluptate sequi architecto iure.'
+            />
         )
     }
 }
