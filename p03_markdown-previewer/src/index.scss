@@ -54,11 +54,13 @@ body {
   color: $preview-title-color;
   height: $title-height;
   line-height: $title-height;
+  top: 0;
   left: 50%;
   right: 0%;
 }
 
 #preview {
+  background: white;
   border-radius: 5px;
   outline: none;
   border: 0;

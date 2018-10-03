@@ -1,20 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-
+import marked from 'marked';
 
 
 class Preview extends React.Component {
+
+
     render() {
+        console.log('Preview: render');
+        var html = marked(this.props.markdownText);
         
         return(
             <div>
                 <div id='preview-title'>Preview</div>
-                <textarea 
-                    id='preview'
-                    readOnly={true}
-                    defaultValue={'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor, doloremque. Cum commodi unde ad culpa nihil quae. Ab alias iusto cum labore harum, corrupti odit voluptatum in maiores et. Asperiores qui odit explicabo consequatur repellendus unde pariatur in reiciendis commodi?'}
-                />
+                <div id='preview' dangerouslySetInnerHTML={{__html: html}}>
+                </div>
             </div>
         )
     }
@@ -40,12 +41,18 @@ class Editor extends React.Component {
 
         this.loadDefaultMarkdown = this.loadDefaultMarkdown.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.updateText = this.updateText.bind(this);
+    }
+
+    updateText(text) {
+        this.setState({
+            markdown: text
+        });
+        this.props.updatePreview(text);
     }
 
     handleChange(event) {
-        this.setState({
-            markdown: event.target.value
-        });
+        this.updateText(event.target.value);
     }
 
     loadDefaultMarkdown() {
@@ -55,7 +62,7 @@ class Editor extends React.Component {
             .then((r) => r.text())
             .then((text) => {
                 console.log('Editor: default text loaded');
-                this.setState({markdown: text,});
+                this.updateText(text);
             })
             .catch((e) => console.log(e));
     }
@@ -66,7 +73,6 @@ class Editor extends React.Component {
     }
 
     render() {
-
         console.log('Editor: render');
         return (
             <textarea
@@ -83,19 +89,34 @@ class Markdown extends React.Component {
         return (
             <div id='markdown'>
                 <Title />
-                <Editor />
+                <Editor updatePreview={this.props.updatePreview}/>
             </div>
         );
     }
 }
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            markdownText: ''
+        };
+        this.updatePreview = this.updatePreview.bind(this);
+    }
+
+    updatePreview(text) {
+        console.log('App: updatePreview');
+        this.setState({
+            markdownText: text
+        });
+    }
+
     render() {
         console.log('App: render')
         return(
             <div>
-                <Markdown />
-                <Preview />
+                <Markdown updatePreview={this.updatePreview}/>
+                <Preview  markdownText={this.state.markdownText}/>
             </div>
         )
     }
