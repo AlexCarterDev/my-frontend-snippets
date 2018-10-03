@@ -8,11 +8,14 @@ class Preview extends React.Component {
     render() {
         
         return(
-            <textarea 
-                id='preview'
-                readOnly={true}
-                defaultValue={'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor, doloremque. Cum commodi unde ad culpa nihil quae. Ab alias iusto cum labore harum, corrupti odit voluptatum in maiores et. Asperiores qui odit explicabo consequatur repellendus unde pariatur in reiciendis commodi?'}
-            />
+            <div>
+                <div id='preview-title'>Preview</div>
+                <textarea 
+                    id='preview'
+                    readOnly={true}
+                    defaultValue={'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor, doloremque. Cum commodi unde ad culpa nihil quae. Ab alias iusto cum labore harum, corrupti odit voluptatum in maiores et. Asperiores qui odit explicabo consequatur repellendus unde pariatur in reiciendis commodi?'}
+                />
+            </div>
         )
     }
 }

@@ -1,9 +1,12 @@
 $app-bg: #565A5C;
 $title-height: 30px;
-$title-color: #ddd;
+$markdown-title-color: #aaa;
+$preview-title-color: #ddd;
+$title-size: 16px;
 $inside-bg: #fff;
 $preview-padding: 15px;
 $markdown-padding-left: 10px;
+$line-color: #ddd;
 
 
 body {
@@ -16,7 +19,7 @@ body {
 #markdown {
   position: fixed;
   top: 0;
-  left: $markdown-padding-left;
+  left: 0;
   right: 50%;
   bottom: 0;
   display: flex;
@@ -25,10 +28,10 @@ body {
 }
 
 #title {
-  padding-left: 10px;
-  border-bottom: 1px solid $title-color;
-  font-size: 16px;
-  color: $title-color;
+  text-align: center;
+  border-bottom: 1px solid $line-color;
+  font-size: $title-size;
+  color: $markdown-title-color;
   line-height: $title-height;
   height: $title-height;
   background: $inside-bg;
@@ -42,6 +45,19 @@ body {
   outline: none;
 }
 
+#preview-title {
+  text-align: center;
+  background: $app-bg;
+  position: fixed;
+  padding-left: 10px;
+  font-size: $title-size;
+  color: $preview-title-color;
+  height: $title-height;
+  line-height: $title-height;
+  left: 50%;
+  right: 0%;
+}
+
 #preview {
   border-radius: 5px;
   outline: none;
@@ -51,6 +67,7 @@ body {
   min-height: 1000px;
   box-sizing: border-box;
   margin: $preview-padding;
+  margin-top: $title-height + $preview-padding;
   margin-left: calc(50% + #{$preview-padding});
   width: calc(50% - 2*#{$preview-padding});
 }
