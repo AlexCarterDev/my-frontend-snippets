@@ -5,11 +5,20 @@ import marked from 'marked';
 
 
 class Preview extends React.Component {
+    constructor(props) {
+        super(props);
+        this.renderer = new marked.Renderer();
 
+        this.renderer.link = function(href, title, text) {
+            return `
+                <a href='${href}' target=_blank>${text}</a>
+            `;
+        }
+    }
 
     render() {
         console.log('Preview: render');
-        var html = marked(this.props.markdownText);
+        var html = marked(this.props.markdownText, {renderer: this.renderer});
         
         return(
             <div>
