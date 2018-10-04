@@ -9,6 +9,7 @@ class Preview extends React.Component {
         super(props);
         this.renderer = new marked.Renderer();
 
+        // Override html rendering link
         this.renderer.link = function(href, title, text) {
             return `
                 <a href='${href}' target=_blank>${text}</a>
@@ -18,7 +19,7 @@ class Preview extends React.Component {
 
     render() {
         console.log('Preview: render');
-        var html = marked(this.props.markdownText, {renderer: this.renderer});
+        var html = marked(this.props.markdownText, {renderer: this.renderer, breaks: true});
         
         return(
             <div>
