@@ -6,7 +6,9 @@
     "node-sass": "^4.9.3",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-redux": "^5.0.7",
     "react-scripts": "2.0.4",
+    "redux": "^4.0.0",
     "sass-loader": "^7.1.0"
   },
   "scripts": {
