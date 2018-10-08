@@ -27,12 +27,20 @@ class AudioButton extends React.Component {
     }
 }
 
+class Title extends React.Component {
+    render() {
+        return (
+            <div id='title-container'>
+                <h2>{this.props.title}</h2>
+            </div>
+        )
+    }
+}
+
+
+
 class App extends React.Component {
 
-    log(event, text) {
-        console.log('button clicked ' + text);
-        console.log(event);
-    }
 
     componentDidMount() {
         console.log('App: didMount');
@@ -42,13 +50,8 @@ class App extends React.Component {
         console.log('App: render');
         return(
             <div>
-                <AudioButton 
-                    buttonId='my-button' 
-                    keyCode={87} 
-                    text='test button'
-                    audioSrc='#'
-                    clickHandler={this.log} 
-                    audioDescr='empty'/>
+                <Title title='Drum machine' />
+
             </div>
         )
     }
