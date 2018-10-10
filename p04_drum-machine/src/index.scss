@@ -1,3 +1,156 @@
 body {
-    background: lightgrey;
+    background: #3D3E43;
+    margin: 0;
+    padding: 0;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+h2 {
+    margin: 0;
+    font-size: 30px;
+    color: white;
+}
+
+#root {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+$drum-machine-width: 434px;
+#drum-machine {    
+    background: #393939;
+    padding: 15px;
+    width: $drum-machine-width;
+    min-width: $drum-machine-width; 
+    box-sizing: border-box;
+    border: 4px solid transparent;
+    border-image: linear-gradient(to bottom, #00FF75 0%, #005527 100%);
+    border-image-slice: 1;
+}
+
+#title-container {
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+#panel {
+    display: inline-block;
+    width: 125px;
+}
+
+// --- DISPLAY ---
+$display-height: 28px;
+#display-container {
+    background: rgb(240, 252, 252);
+    height: $display-height;
+    padding: 0 5px;
+    border: 4px darkgreen solid;
+    box-shadow: inset 2px 3px 4px #aaa;
+}
+#display {
+    font-size: 18px;
+    color: rgb(66, 66, 66);
+    line-height: $display-height;
+}
+
+// --- DRUM PAD --- 
+$drum-pad-size: 260px;
+#drum-pad {
+    display: grid;
+    float: right;
+    width: $drum-pad-size;
+    height: $drum-pad-size;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
+}
+[id^="drum-pad-"] {
+    color: #444;
+    font-size: 1.7em;
+}
+
+// --- BUTTONS ---
+// generate button style classes
+$button-color-hue:
+    "red" 12,
+    "green" 135,
+    "blue" 205,
+    "purple" 285;
+@each $name, $hue in $button-color-hue{
+    .button-#{$name} {
+        background: hsl($hue, 70%, 40%);
+        border: none;
+        outline: none;
+        user-select: none;
+        border-radius: 5px;
+    }
+    .button-#{$name}:hover {
+        cursor: pointer;
+    }
+    .button-#{$name}:active {
+        background: radial-gradient(
+            hsl($hue, 100%, 85%) 40%, 
+            hsl($hue, 100%, 50%) 130%
+        );
+        box-shadow: 0px 0px 35px -5px hsl($hue, 100%, 50%);
+    }
+}
+
+// --- BANK PAD ---
+#bank-pad {
+    display: flex;
+    flex-direction: column;
+}
+[id^="bank-pad-"] {
+    flex: 1fr;
+    margin: 0 4px;
+    margin-top: 15px;
+    height: 45px;
+    font-size: 22px;
+    // override .button-color property
+    background: hsl(205, 0%, 30%);
+}
+#bank-pad > button { 
+    margin-top: 16px;
+}
+
+// --- VOLUME SLIDER ---
+$slider-thumb-size: 20px;
+$slider-thumb-color: hsl(135, 70%, 40%);;
+#slider-container {
+    margin: 0;
+    padding: 5px;
+    padding-top: 15px;
+}
+.slider {
+    margin: 0;
+    width: 100%;
+    -webkit-appearance: none;
+    height: 3px;
+    border-radius: 5px;
+    background: #999;
+    outline: none;
+}
+input[type=range]::-moz-range-track {
+    background: none;
+}
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: $slider-thumb-size;
+    height: $slider-thumb-size;
+    border-radius: 50%;
+    background: $slider-thumb-color;
+    cursor: pointer;
+}
+.slider::-moz-range-thumb {
+    width: $slider-thumb-size;
+    height: $slider-thumb-size;
+    border-radius: 50%;
+    background: $slider-thumb-color;
+    cursor: pointer;
 }

@@ -11,8 +11,8 @@ class AudioButton extends React.Component {
         console.log('AudioButton ' + this.props.id + ': render');
 
         return (
-            <button id={this.props.id}>
-                X
+            <button id={this.props.id} className={this.props.className}>
+                {this.props.text}
                 <audio>
                     <source src='#' />
                 </audio>
@@ -30,12 +30,15 @@ class DrumPad extends React.Component {
     }
 
     createAudioButtons(n) {
+        var texts = ['Q', 'W', 'E', 'A', 'S', 'D', 'Z', 'X', 'C'];
         let buttons = [];
         for (let i = 0; i < n; i++) {
             buttons.push(
                 <AudioButton 
                     key={i}
-                    id={'drum-pad-' + i}/>
+                    text={texts[i]}
+                    id={'drum-pad-' + i}
+                    className='button-green'/>
             );
         }
 
@@ -64,17 +67,21 @@ class Title extends React.Component {
 class Display extends React.Component {
   render() {
     return (
-      <div>
-        <span>display</span>
+      <div id='display-container'>
+        <span id='display'>display</span>
       </div>
     )
   }
 }
 
 class SelectBankButton extends React.Component {
+
     render() {
+        
         return(
-            <button id={this.props.id}>bank</button>
+            <button 
+                className='button-blue'
+                id={this.props.id}>{this.props.text}</button>
         )
     }
 }
@@ -87,9 +94,11 @@ class BankPad extends React.Component {
 
     createSelectButtons(n) {
         let buttons = [];
+        let texts = ['bank 1', 'bank 2', 'bank 3'];
         for (let i = 0; i < n; i++) {
             buttons.push(
                 <SelectBankButton 
+                    text={texts[i]}
                     key={i}
                     id={'bank-pad-' + i}/>
             );
@@ -100,22 +109,22 @@ class BankPad extends React.Component {
 
     render() {
       return (
-        <div>
+        <div id='bank-pad'>
             {this.buttons}
         </div>
       )
     }
   }
 
-  class Volume extends React.Component {
+class Volume extends React.Component {
     render() {
-      return (
-        <div>
-          volume
-        </div>
-      )
+        return (
+            <div id='slider-container'>
+                    <input type="range" min="1" max="100" className="slider" />
+            </div>
+        )
     }
-  }
+}
 
 class Panel extends React.Component {
     render() {
@@ -130,8 +139,6 @@ class Panel extends React.Component {
 }
 
 class App extends React.Component {
-
-
     componentDidMount() {
         console.log('App: didMount');
     }
@@ -139,7 +146,7 @@ class App extends React.Component {
     render() {
         console.log('App: render');
         return(
-            <div>
+            <div id='drum-machine'>
                 <Title title='Drum machine' />
                 <Panel />
                 <DrumPad />
