@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
-const SET_VOLUME = 'SET_VOLUME';
-const SET_BANK = 'SET_BANK';
+import { SET_VOLUME, SET_BANK } from './actions.js'
 
 const initialBank = {
     name: 'init',
