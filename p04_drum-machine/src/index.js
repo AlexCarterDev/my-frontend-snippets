@@ -1,11 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import rootReducer from './reducers.js';
+import rootReducer from './reducers';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import { setVolume, setBankById } from './actions'
 
 const store = createStore(rootReducer);
+
+console.log('Store initial state: ');
+console.log(store.getState());
+
+const unsubscribe = store.subscribe(() => {
+    console.log('Store state has changed: ');
+    console.log(store.getState());
+})
+
+store.dispatch(setVolume(29));
+store.dispatch(setBankById(2));
+store.dispatch(setBankById(1));
+store.dispatch(setBankById(0));
+
+unsubscribe();
 
 class AudioButton extends React.Component {
     render() {
