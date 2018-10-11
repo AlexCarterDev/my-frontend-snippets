@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
+import rootReducer from './reducers.js';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
-
-
-// --- React Components ---
+const store = createStore(rootReducer);
 
 class AudioButton extends React.Component {
     render() {
@@ -108,13 +109,13 @@ class BankPad extends React.Component {
     }
 
     render() {
-      return (
-        <div id='bank-pad'>
-            {this.buttons}
-        </div>
-      )
+        return (
+            <div id='bank-pad'>
+                {this.buttons}
+            </div>
+        )
     }
-  }
+}
 
 class Volume extends React.Component {
     render() {
@@ -155,4 +156,9 @@ class App extends React.Component {
     }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root')
+);
