@@ -1,5 +1,6 @@
 export const SET_VOLUME = 'SET_VOLUME';
 export const SET_BANK = 'SET_BANK';
+export const DISPLAY_TEXT = 'DISPLAY_TEXT';
 
 export const bankList = [
     // bank 1
@@ -137,6 +138,10 @@ export const setVolume = volume => ({
 
 export const setBankById = id => ({
     type: SET_BANK,
-    name: bankList[id].name,
-    samples: bankList[id].samples
+    bank: bankList[id]
+})
+
+export const displayText = text => ({
+    type: DISPLAY_TEXT,
+    displayText: text
 })
