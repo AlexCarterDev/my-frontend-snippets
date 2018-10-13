@@ -15,7 +15,6 @@ const volume = (state = 100, action) => {
 const bankIndex = (state = 0, action) => {
     switch(action.type) {
         case SELECT_BANK: {
-            console.log('reducer selectBank: ' + action.bankIndex);
             return action.bankIndex;
         }
         default: {
