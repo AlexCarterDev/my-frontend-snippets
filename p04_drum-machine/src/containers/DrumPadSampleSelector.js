@@ -2,10 +2,12 @@ import { connect } from 'react-redux'
 import DrumPad from '../components/DrumPad'
 import { displayText } from '../actions'
 
+
 const mapStateToProps = state => {
     console.log('DrumPadSampleSelector: mapStateToProps')
+    console.log(state);
     return {
-        bank: state.bank,
+        bankIndex: state.bankIndex,
     }
 }
 

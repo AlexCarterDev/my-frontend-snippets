@@ -1,10 +1,11 @@
 import React from 'react';
 import PlayButton from './PlayButton'
+import { getBankByIndex } from '../bank'
 
-const DrumPad = ({bank, playButtonClicked}) => {
+const DrumPad = ({bankIndex, playButtonClicked}) => {
     console.log('DrumPad: render');
     const texts = ['Q', 'W', 'E', 'A', 'S', 'D', 'Z', 'X', 'C'];
-
+    var bank = getBankByIndex(bankIndex);
     const keyCodes = [];
     for (let i = 0; i < texts.length; i++) {
         keyCodes.push(texts[i].charCodeAt(0));
