@@ -5,7 +5,6 @@ import { displayText } from '../actions'
 
 const mapStateToProps = state => {
     console.log('DrumPadSampleSelector: mapStateToProps')
-    console.log(state);
     return {
         bankIndex: state.bankIndex,
     }

@@ -4,7 +4,6 @@ import './index.scss';
 import rootReducer from './reducers';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { setVolume, setBankById } from './actions'
 import App from './components/App'
 
 const store = createStore(rootReducer);

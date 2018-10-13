@@ -14,10 +14,10 @@ export default class BankPad extends React.Component {
     }
 
     render() {
+        console.log('BankPad: render');
         const buttons = [];
         const texts = ['bank 1', 'bank 2', 'bank 3'];
 
-        console.log(this.props);
         for (let i = 0; i < texts.length; i++) {
             buttons.push(
                 <SelectBankButton 
