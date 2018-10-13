@@ -109,18 +109,27 @@ $button-color-hue:
 
 
 // --- BANK PAD ---
+$bank-button-hz-margin: 2px;
 #bank-pad {
-    display: flex;
-    flex-direction: column;
+    display: block;
 }
 [id^="bank-pad-"] {
-    flex: 1fr;
-    margin: 0 4px;
+    width: calc(100% - #{2*$bank-button-hz-margin});
+    margin: 0 $bank-button-hz-margin;
     margin-top: 15px;
+    padding: 0;
     height: 45px;
     font-size: 22px;
-    // override .button-color property
+}
+.bank-pad-button-not-selected {
     background: hsl(205, 0%, 30%);
+    border: none;
+    outline: none;
+    user-select: none;
+    border-radius: 5px;
+}
+.bank-pad-button-not-selected:hover {
+    cursor: pointer;
 }
 #bank-pad > button { 
     margin-top: 16px;
