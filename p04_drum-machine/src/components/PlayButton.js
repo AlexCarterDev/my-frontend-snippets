@@ -1,7 +1,8 @@
 import React from 'react';
 
-const PlayButton = ({id, cls, text, src, keyCode, onClick}) => {
+const PlayButton = ({id, text, src, keyCode, onClick}) => {
     console.log('PlayButton ' + id + ': render');
+
 
     var play = () => {
         console.log('PlayButton ' + id + ': play');
@@ -9,8 +10,17 @@ const PlayButton = ({id, cls, text, src, keyCode, onClick}) => {
         onClick();
     }
 
-    document.addEventListener('keydown', (event) => {
-        if (event.keyCode === keyCode) {
+    var simulatePressButton = () => {
+        var element = document.getElementById(id);
+        element.classList.add('button-green-active');
+        setTimeout(() => {
+            element.classList.remove('button-green-active');
+        }, 100);
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.keyCode === keyCode) {
+            simulatePressButton();
             play();
         }
     });
@@ -18,7 +28,7 @@ const PlayButton = ({id, cls, text, src, keyCode, onClick}) => {
     return (
         <button 
             id={id} 
-            className={cls}
+            className={'button-green'}
             onClick={play}
         >
             {text}

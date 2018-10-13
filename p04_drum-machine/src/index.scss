@@ -98,7 +98,15 @@ $button-color-hue:
         );
         box-shadow: 0px 0px 35px -5px hsl($hue, 100%, 50%);
     }
+    .button-#{$name}-active {
+        background: radial-gradient(
+            hsl($hue, 100%, 85%) 40%, 
+            hsl($hue, 100%, 50%) 130%
+        );
+        box-shadow: 0px 0px 35px -5px hsl($hue, 100%, 50%);
+    }
 }
+
 
 // --- BANK PAD ---
 #bank-pad {

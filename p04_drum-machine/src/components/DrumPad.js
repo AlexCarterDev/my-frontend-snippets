@@ -18,7 +18,6 @@ const DrumPad = ({bank, playButtonClicked}) => {
                 key={i}
                 text={texts[i]}
                 id={'drum-pad-' + i}
-                cls='button-green'
                 src={bank.samples[i].url}
                 keyCode={keyCodes[i]}
                 onClick={() => playButtonClicked(bank.samples[i].description)}
