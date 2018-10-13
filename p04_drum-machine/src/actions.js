@@ -1,6 +1,6 @@
 export const SET_VOLUME = 'SET_VOLUME';
 export const SELECT_BANK = 'SELECT_BANK';
-export const DISPLAY_TEXT = 'DISPLAY_TEXT';
+export const SAMPLE_DESCRIPTION = 'SAMPLE_DESCRIPTION';
 
 export const setVolume = volume => ({
     type: SET_VOLUME,
@@ -12,7 +12,7 @@ export const selectBank = index => ({
     bankIndex: index
 })
 
-export const displayText = text => ({
-    type: DISPLAY_TEXT,
-    displayText: text
+export const sampleDescription = description => ({
+    type: SAMPLE_DESCRIPTION,
+    description
 })

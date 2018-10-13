@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { SET_VOLUME, SELECT_BANK, DISPLAY_TEXT } from './actions.js'
+import { SET_VOLUME, SELECT_BANK, SAMPLE_DESCRIPTION } from './actions.js'
 
 const volume = (state = 100, action) => {
     switch(action.type) {
@@ -23,10 +23,10 @@ const bankIndex = (state = 0, action) => {
     }
 }
 
-const display = (state = 'init', action) => {
+const sampleDescription = (state = 'init', action) => {
     switch(action.type) {
-        case DISPLAY_TEXT: {
-            return action.displayText;
+        case SAMPLE_DESCRIPTION: {
+            return action.description;
         }
         default: {
             return state;
@@ -37,5 +37,5 @@ const display = (state = 'init', action) => {
 export default combineReducers({
     volume, 
     bankIndex,
-    display
+    sampleDescription
 })

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import DrumPad from '../components/DrumPad'
-import { displayText } from '../actions'
+import { sampleDescription } from '../actions'
 
 
 const mapStateToProps = state => {
@@ -13,7 +13,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     console.log('DrumPadSampleSelector: mapDispatchToProps');
     return {
-        playButtonClicked: (text) => {dispatch(displayText(text))}
+        playButtonClicked: (text) => {dispatch(sampleDescription(text))}
     }
 }
 
