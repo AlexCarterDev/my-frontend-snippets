@@ -10,7 +10,9 @@ export default class PlayButton extends Component {
 
     play() {
         console.log('PlayButton ' + this.props.id + ': play');
-        new Audio(this.props.src).play();
+        var audio = new Audio(this.props.src);
+        audio.volume = this.props.volume/100;
+        audio.play();
         this.props.onClick();
     }
 

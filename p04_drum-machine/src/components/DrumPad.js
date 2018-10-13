@@ -2,7 +2,7 @@ import React from 'react';
 import PlayButton from './PlayButton'
 import { getBankByIndex } from '../bank'
 
-const DrumPad = ({bankIndex, playButtonClicked}) => {
+const DrumPad = ({bankIndex, playButtonClicked, volume}) => {
     console.log('DrumPad: render');
     const texts = ['Q', 'W', 'E', 'A', 'S', 'D', 'Z', 'X', 'C'];
     var bank = getBankByIndex(bankIndex);
@@ -17,6 +17,7 @@ const DrumPad = ({bankIndex, playButtonClicked}) => {
         buttons.push(
             <PlayButton 
                 key={i}
+                volume={volume}
                 text={texts[i]}
                 id={'drum-pad-' + i}
                 src={bank.samples[i].url}

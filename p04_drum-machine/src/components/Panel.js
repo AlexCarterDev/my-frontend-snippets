@@ -1,14 +1,14 @@
 import React from 'react';
 import DisplayContainer from '../containers/DisplayContainer';
 import BankPadContainer from '../containers/BankPadContainer';
-import Volume from './Volume';
+import VolumeContainer from '../containers/VolumeContainer';
 
 const Panel = () => {
     return (
         <div id='panel'>
             <DisplayContainer />
             <BankPadContainer />
-            <Volume />
+            <VolumeContainer />
         </div>
     )
 }

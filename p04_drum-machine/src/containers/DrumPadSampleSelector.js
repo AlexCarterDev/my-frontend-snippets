@@ -7,6 +7,7 @@ const mapStateToProps = state => {
     console.log('DrumPadSampleSelector: mapStateToProps')
     return {
         bankIndex: state.bankIndex,
+        volume: state.volume
     }
 }
 
