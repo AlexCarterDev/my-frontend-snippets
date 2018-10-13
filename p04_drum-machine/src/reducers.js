@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux'
 import { SET_VOLUME, SET_BANK, DISPLAY_TEXT, bankList } from './actions.js'
 
-console.log(bankList);
 const initialBank = bankList[0];
 
 const volume = (state = 100, action) => {

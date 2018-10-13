@@ -3,8 +3,13 @@ import PlayButton from './PlayButton'
 
 const DrumPad = ({bank, playButtonClicked}) => {
     console.log('DrumPad: render');
-    console.log(bank);
-    var texts = ['Q', 'W', 'E', 'A', 'S', 'D', 'Z', 'X', 'C'];
+    const texts = ['Q', 'W', 'E', 'A', 'S', 'D', 'Z', 'X', 'C'];
+
+    const keyCodes = [];
+    for (let i = 0; i < texts.length; i++) {
+        keyCodes.push(texts[i].charCodeAt(0));
+    }
+
     let buttons = [];
     for (let i = 0; i < texts.length; i++) {
         
@@ -15,6 +20,7 @@ const DrumPad = ({bank, playButtonClicked}) => {
                 id={'drum-pad-' + i}
                 cls='button-green'
                 src={bank.samples[i].url}
+                keyCode={keyCodes[i]}
                 onClick={() => playButtonClicked(bank.samples[i].description)}
             />
         );
