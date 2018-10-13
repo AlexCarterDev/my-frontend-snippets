@@ -4,15 +4,18 @@ export const SAMPLE_DESCRIPTION = 'SAMPLE_DESCRIPTION';
 
 export const setVolume = volume => ({
     type: SET_VOLUME,
-    volume
+    volume,
+    action: 'volume'
 })
 
 export const selectBank = index => ({
     type: SELECT_BANK,
-    bankIndex: index
+    bankIndex: index,
+    action: 'bankIndex'
 })
 
 export const sampleDescription = description => ({
     type: SAMPLE_DESCRIPTION,
-    description
+    description,
+    action: 'bankDescription'
 })

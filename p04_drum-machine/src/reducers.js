@@ -34,8 +34,26 @@ const sampleDescription = (state = 'init', action) => {
     }
 }
 
+const action = (state = 'init', action) => {
+    switch(action.type) {
+        case SAMPLE_DESCRIPTION: {
+            return 'sampleDescription'
+        }
+        case SELECT_BANK: {
+            return 'bankIndex'
+        }
+        case SET_VOLUME: {
+            return 'volume'
+        }
+        default: {
+            return state;
+        }
+    }
+}
+
 export default combineReducers({
     volume, 
     bankIndex,
-    sampleDescription
+    sampleDescription,
+    action,
 })

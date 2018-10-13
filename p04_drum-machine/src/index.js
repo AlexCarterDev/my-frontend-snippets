@@ -7,6 +7,8 @@ import { createStore } from 'redux';
 import App from './components/App'
 
 const store = createStore(rootReducer);
+console.log('Store');
+console.log(store.getState());
 
 ReactDOM.render(
     <Provider store={store}>
@@ -14,3 +16,5 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 );
+
+
