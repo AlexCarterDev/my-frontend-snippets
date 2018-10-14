@@ -8,16 +8,16 @@ export default class PlayButton extends Component {
         this.handleKeydown = this.handleKeydown.bind(this);
     }
 
+
     play() {
-        console.log('PlayButton ' + this.props.id + ': play');
-        var audio = new Audio(this.props.src);
-        audio.volume = this.props.volume/100;
-        audio.play();
+        console.log('PlayButton ' + this.props.description + ': play');
+        this.audio.currentTime = 0;
+        this.audio.play();
         this.props.onClick();
     }
 
     simulatePressButton() {
-        var element = document.getElementById(this.props.id);
+        var element = document.getElementById(this.props.description);
         element.classList.add('button-green-active');
         setTimeout(() => {
             element.classList.remove('button-green-active');
@@ -28,12 +28,14 @@ export default class PlayButton extends Component {
         if (e.keyCode === this.props.keyCode) {
             console.log('keydown ' + e.keyCode);
             this.simulatePressButton();
-            this.play();
+            this.play(e);
         }
     }
 
     componentDidMount() {
+        this.audio = document.getElementById(this.props.text);
         document.addEventListener('keydown', this.handleKeydown);
+        
     }
 
     componentWillUnmount() {
@@ -41,17 +43,17 @@ export default class PlayButton extends Component {
     }
 
     render() {
-        console.log('PlayButton ' + this.props.id + ': render');
+        console.log('PlayButton ' + this.props.description + ': render');
+        
         return (
+
             <button 
-                id={this.props.id} 
-                className={'button-green'}
+                id={this.props.description}
+                className={'drum-pad button-green'}
                 onClick={this.play}
             >
+                <audio className='clip' id={this.props.text} src={this.props.src} ></audio>
                 {this.props.text}
-                <audio>
-                    <source src={this.props.src} />
-                </audio>
             </button>
         )
     }

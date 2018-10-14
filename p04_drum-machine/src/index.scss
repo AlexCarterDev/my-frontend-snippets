@@ -68,7 +68,7 @@ $drum-pad-size: 260px;
     grid-template-rows: 1fr 1fr 1fr;
     grid-gap: 10px;
 }
-[id^="drum-pad-"] {
+.drum-pad {
     color: #444;
     font-size: 1.7em;
 }
