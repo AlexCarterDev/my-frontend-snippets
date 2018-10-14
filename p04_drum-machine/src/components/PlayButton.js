@@ -13,14 +13,14 @@ export default class PlayButton extends Component {
         console.log('PlayButton ' + this.props.description + ': play');
         this.audio.currentTime = 0;
         this.audio.play();
+        this.audio.volume = this.props.volume/100;
         this.props.onClick();
     }
 
     simulatePressButton() {
-        var element = document.getElementById(this.props.description);
-        element.classList.add('button-green-active');
+        this.button.classList.add('button-green-active');
         setTimeout(() => {
-            element.classList.remove('button-green-active');
+            this.button.classList.remove('button-green-active');
         }, 100);
     }
 
@@ -34,6 +34,7 @@ export default class PlayButton extends Component {
 
     componentDidMount() {
         this.audio = document.getElementById(this.props.text);
+        this.button = document.getElementById(this.props.description);
         document.addEventListener('keydown', this.handleKeydown);
         
     }
@@ -44,7 +45,7 @@ export default class PlayButton extends Component {
 
     render() {
         console.log('PlayButton ' + this.props.description + ': render');
-        
+
         return (
 
             <button 
