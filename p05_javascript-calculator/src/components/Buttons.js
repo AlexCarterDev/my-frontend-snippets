@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class Buttons extends Component {
   render() {
     return (
-      <div>
+      <div id='buttons'>
         <button id='clear'>AC</button>
         <button id='divide'>/</button>
         <button id='multiply'>x</button>
