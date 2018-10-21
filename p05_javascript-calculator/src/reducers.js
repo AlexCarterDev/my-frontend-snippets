@@ -40,6 +40,7 @@ export function addOperation(formula, op) {
             if (op === '=') {
                 let str = formula.join('');
                 result = eval(str).toString();
+                formula.push(op);
                 formula.push(result);
             } else {
                 formula.push(op);
