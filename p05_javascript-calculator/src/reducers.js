@@ -72,7 +72,9 @@ export function addDigit(formula, digit) {
                 n = digit;
             }
             if (isNumber(n)) {
-                formula[formula.length-1] = n;
+                if (last.length <= 32) {
+                    formula[formula.length-1] = n;
+                }
             }
         } else {
             formula.push(digit);
