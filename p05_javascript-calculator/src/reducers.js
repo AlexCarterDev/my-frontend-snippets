@@ -24,9 +24,6 @@ function getLast(f) {
 }
 
 export function addOperation(formula, op) {
-    console.log('operation: ');
-    console.log('  formula: ' + formula);
-    console.log('  operation: ' + op);
     if (isContainEqulasSign(formula)) {
         if (op !== '=') {
             var n = parseFloat(getLast(formula));
@@ -47,11 +44,17 @@ export function addOperation(formula, op) {
             }
         } else {
             formula.pop();
-            formula.push(op);
+            if (op === '=') {
+                let str = formula.join('');
+                let result = eval(str).toString();
+                formula.push(op);
+                formula.push(result);
+            } else {
+                formula.push(op);
+            }
         }
     }
 
-    console.log('  result: ' + formula);
     return formula;
 }
 
