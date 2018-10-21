@@ -1,3 +1,5 @@
+/* eslint no-eval: 0 */
+
 import { combineReducers } from "redux";
 import { OPERATION, CLEAR, DIGIT } from './actions'
 
@@ -31,6 +33,7 @@ export function addOperation(formula, op) {
             let result;
             if (op === '=') {
                 let str = formula.join('');
+                
                 result = eval(str).toString();
             }
             formula.push(op);

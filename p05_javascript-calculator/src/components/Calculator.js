@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import Formula from './Formula';
-import Display from './Display';
-import Buttons from './Buttons';
+import DisplayContainer from '../containers/DisplayContainer';
+import FormulaContainer from '../containers/FormulaContainer';
+import ButtonsContainer from '../containers/ButtonsContainer';
 
 export default class Calculator extends Component {
   render() {
     return (
       <div id='calc'>
-        <Formula />
-        <Display />
-        <Buttons />
+        <FormulaContainer />
+        <DisplayContainer />
+        <ButtonsContainer />
       </div>
     )
   }

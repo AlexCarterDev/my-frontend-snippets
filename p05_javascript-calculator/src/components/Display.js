@@ -4,7 +4,7 @@ export default class Display extends Component {
   render() {
     return (
       <div id='display'>
-        4532.334
+        {this.props.str}
       </div>
     )
   }
