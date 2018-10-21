@@ -55,14 +55,13 @@ export function addDigit(formula, digit) {
         var last = getLast(formula);
         if (isNumber(last)) {
             var n = last + digit;
+
             // remove zeros at the beginning
-            if (('0' === last) & (digit === '0')) {
-                n = '0';
+            if ('0' === last & (digit !== '.')) {
+                n = digit;
             }
             if (isNumber(n)) {
                 formula[formula.length-1] = n;
-            } else {
-                console.error("'" + digit + "' isn't digit symbol");
             }
         } else {
             formula.push(digit);
