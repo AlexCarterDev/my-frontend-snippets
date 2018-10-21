@@ -6,6 +6,9 @@ import { OPERATION, CLEAR, DIGIT } from './actions'
 const initialState = ['0'];
 
 export function isNumber(n) {
+    if (n === '-') {
+        return false;
+    }
     return /^-?\d*\.?\d*$/.test(n);
 }
 
@@ -21,6 +24,9 @@ function getLast(f) {
 }
 
 export function addOperation(formula, op) {
+    console.log('operation: ');
+    console.log('  formula: ' + formula);
+    console.log('  operation: ' + op);
     if (isContainEqulasSign(formula)) {
         if (op !== '=') {
             var n = parseFloat(getLast(formula));
@@ -33,17 +39,18 @@ export function addOperation(formula, op) {
             let result;
             if (op === '=') {
                 let str = formula.join('');
-                
                 result = eval(str).toString();
+                formula.push(result);
+            } else {
+                formula.push(op);
             }
-            formula.push(op);
-            formula.push(result);
         } else {
             formula.pop();
             formula.push(op);
         }
     }
 
+    console.log('  result: ' + formula);
     return formula;
 }
 
