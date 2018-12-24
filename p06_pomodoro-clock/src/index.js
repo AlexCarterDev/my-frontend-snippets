@@ -7,9 +7,9 @@ import './index.scss';
 class ButtonsContainer extends React.Component {
     render() {
         return (
-            <div id='buttons-conatiner'>
-                <button id='start-stop'>Start</button>
-                <button id='reset'>Reset</button>
+            <div id='buttons-container'>
+                <button id='start-stop' className='rect-button'>Start</button>
+                <button id='reset' className='rect-button'>Reset</button>
             </div>
         )
     }
@@ -30,10 +30,10 @@ class SessionLengthContainer extends React.Component {
     render() {
         return (
             <div id='session-length-container'>
-                <div id='session-label'>Break Length</div>
-                <button id='session-increment'>+</button>
+                <div id='session-label'>Session Length</div>
+                <button id='session-increment' className='round-button'>+</button>
                 <span id='session-length'>05</span>
-                <button id='session-decrement'>-</button>
+                <button id='session-decrement' className='round-button'>-</button>
             </div>
         )
     }
@@ -44,9 +44,9 @@ class BreakLengthContainer extends React.Component {
         return (
             <div id='break-length-container'>
                 <div id='break-label'>Break Length</div>
-                <button id='break-increment'>+</button>
+                <button id='break-increment' className='round-button'>+</button>
                 <span id='break-length'>05</span>
-                <button id='break-decrement'>-</button>
+                <button id='break-decrement' className='round-button'>-</button>
             </div>
         )
     }
@@ -55,7 +55,7 @@ class BreakLengthContainer extends React.Component {
 class BreakAndSessionContainer extends React.Component {
     render() {
         return (
-            <div>
+            <div id='break-and-session-container'>
                 <BreakLengthContainer />
                 <SessionLengthContainer />
             </div>

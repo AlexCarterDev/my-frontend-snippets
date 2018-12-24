@@ -1,4 +1,109 @@
 body {
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
+* {
+  font-family: 'Karla', sans-serif;
+}
+$orange-theme-bg: #F2C94C;
+$orange-theme-hover: #f1ac4b;
+$orange-theme-color: #555;
+
+.rect-button {
+  height: 35px;
+  background: $orange-theme-bg;
+  color: $orange-theme-color;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  width: 100px;
+  cursor: pointer;
+}
+.rect-button:hover {
+  background: $orange-theme-hover;
+}
+
+.round-button {
+  font-size: 20px;
+  line-height: 20px;
+  height: 30px;
+  background: $orange-theme-bg;
+  color: $orange-theme-color;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  cursor: pointer;
+}
+.round-button:hover {
+  background: $orange-theme-hover;
+}
+
+h1 {
+  color: $orange-theme-color;
+}
+
+#pomodoro {
+  width: 350px;
+}
+
+$title-height: 60px;
+#title-container {
+  text-align: center;
+  font-size: 13px;
+  height: $title-height;
+  line-height: $title-height;
+}
+
+#break-and-session-container {
+  padding: 5px;
+}
+#break-length-container {
+  display: inline-block;
+}
+#session-length-container {
+  float: right;
+}
+#session-label {
+  padding: 8px 10px;
+}
+#session-length {
+  font-family: 'Orbitron', sans-serif;
+  padding: 0 28px;
+}
+#break-label {
+  padding: 8px 20px;
+}
+#break-length {
+  font-family: 'Orbitron', sans-serif;
+  padding: 0 28px;
+}
+
+#time-container {
+  height: 120px;
+}
+#timer-label {
+  padding-top: 10px;
+  color: $orange-theme-color;
+  text-align: center;
+  line-height: 45px;
+  font-size: 20px;
+}
+#time-left {
+  color: $orange-theme-color;
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  line-height: 45px;
+  font-size: 28px;
+}
+
+#buttons-container {
+  padding: 5px;
+}
+#reset {
+  float: right;
+}
+
