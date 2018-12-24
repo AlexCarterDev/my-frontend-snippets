@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
+import { combineReducers, createStore } from 'redux';
+import { Provider } from 'react-redux'
 
 // --- Components ---
 
@@ -86,5 +88,93 @@ class PomodoroApp extends React.Component {
     }
 }
 
-ReactDOM.render(<PomodoroApp />, document.getElementById('root'));
+// --- Actions ---
+const SET_BREAK_LENGTH = 'set_break_length';
+const SET_SESSION_LENGTH = 'set_session_length';
+const SET_TIME_LEFT = 'set_time_left';
+const RESET = 'reset';
+const START_STOP = 'START_STOP';
+const SWITCH_POMODORO_STATE = 'set_break_state';
+
+
+
+// --- Reducers ---
+const POMODORO_STATE_BREAK = 'break';
+const POMODORO_STATE_SESSION = 'session';
+const POMODORO_STATE_PAUSE = 'pause';
+
+const initState = {
+    breakLength: 5,
+    sessionLength: 25,
+    timeLeft: 25.0,
+    pomodoroState: POMODORO_STATE_PAUSE,
+    pomodoroLastState: POMODORO_STATE_SESSION
+}
+
+const pomodoroReducer = (state = initState, action) => {
+    switch (action.type) {
+        case SET_BREAK_LENGTH: {
+            if ((action.breakLength > 0) && (action.breakLength <= 60)) {
+                return Object.assign({}, ...state, { breakLength: action.breakLength });
+            } else {
+                return state;
+            }
+        }
+        case SET_SESSION_LENGTH: {
+            if ((action.sessionLength > 0) && (action.sessionLength <= 60)) {
+                return Object.assign({}, ...state, { sessionLength: action.sessionLength });
+            } else {
+                return state;
+            }
+        }
+        case SWITCH_POMODORO_STATE: {
+            if (state.pomodoroState === POMODORO_STATE_SESSION) {
+                return Object.assign({}, ...state, {
+                    pomodoroState: POMODORO_STATE_BREAK,
+                    pomodoroLastState: state.pomodoroState
+                });
+            } else if (state.pomodoroState === POMODORO_STATE_BREAK) {
+                return Object.assign({}, ...state, {
+                    pomodoroState: POMODORO_STATE_SESSION,
+                    pomodoroLastState: state.pomodoroState
+                });
+            } else {
+                return state;
+            }
+        }
+        case SET_TIME_LEFT: {
+            return Object.assign({}, ...state, { timeLeft: action.timeLeft });
+        }
+        case START_STOP: {
+            var pState;
+            var pLastState;
+            if (state.pomodoroState === POMODORO_STATE_PAUSE) {
+                pState = state.pomodoroLastState;
+                pLastState = POMODORO_STATE_PAUSE;
+            } else {
+                pState = POMODORO_STATE_PAUSE;
+                pLastState = state.pomodoroState;
+            }
+
+            return Object.assign({}, ...state, {
+                pomodoroState: pState,
+                pomodoroLastState: pLastState
+            });
+        }
+        case RESET: {
+            return initState;
+        }
+        default: {
+            return state;
+        }
+    }
+}
+const store = createStore(pomodoroReducer);
+
+ReactDOM.render(
+    <Provider store={store}>
+        <PomodoroApp />
+    </Provider>
+    , document.getElementById('root')
+);
 
