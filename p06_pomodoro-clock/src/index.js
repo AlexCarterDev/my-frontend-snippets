@@ -98,6 +98,32 @@ const START= 'start';
 const STOP = 'stop';
 const DECREMENT_TIME = 'dec_time';
 
+const incrementBreak = () => ({
+    type: INCREMENT_BREAK
+})
+const decrementBreak = () => ({
+    type: DECREMENT_BREAK
+})
+const incrementSession = () => ({
+    type: INCREMENT_SESSION
+})
+const decrementSession = () => ({
+    type: DECREMENT_SESSION
+})
+const reset = () => ({
+    type: RESET
+})
+const start = () => ({
+    type: START
+})
+const stop = () => ({
+    type: STOP
+})
+const decrementTime = () => ({
+    type: DECREMENT_TIME
+})
+
+
 // --- Reducers ---
 const POMODORO_STATE_BREAK = 'break';
 const POMODORO_STATE_SESSION = 'session';
@@ -206,6 +232,8 @@ const pomodoroReducer = (state = initState, action) => {
         }
     }
 }
+
+
 const store = createStore(pomodoroReducer);
 
 ReactDOM.render(
