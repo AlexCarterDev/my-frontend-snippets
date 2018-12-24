@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import { combineReducers, createStore } from 'redux';
+import { createStore } from 'redux';
 import { Provider } from 'react-redux'
 
 // --- Components ---
@@ -89,14 +89,14 @@ class PomodoroApp extends React.Component {
 }
 
 // --- Actions ---
-const SET_BREAK_LENGTH = 'set_break_length';
-const SET_SESSION_LENGTH = 'set_session_length';
-const SET_TIME_LEFT = 'set_time_left';
+const INCREMENT_BREAK = 'inc_break';
+const DECREMENT_BREAK = 'dec_break';
+const INCREMENT_SESSION = 'inc_session';
+const DECREMENT_SESSION = 'dec_session';
 const RESET = 'reset';
-const START_STOP = 'START_STOP';
-const SWITCH_POMODORO_STATE = 'set_break_state';
-
-
+const START= 'start';
+const STOP = 'stop';
+const DECREMENT_TIME = 'dec_time';
 
 // --- Reducers ---
 const POMODORO_STATE_BREAK = 'break';
@@ -106,60 +106,97 @@ const POMODORO_STATE_PAUSE = 'pause';
 const initState = {
     breakLength: 5,
     sessionLength: 25,
-    timeLeft: 25.0,
+    timeLeft: 2500,
     pomodoroState: POMODORO_STATE_PAUSE,
     pomodoroLastState: POMODORO_STATE_SESSION
 }
 
+function isLengthCorrect(length) {
+    return (length > 0) && (length <= 60)
+}
+function changeBreakLength(state, val) {
+    var length = state.breakLength + val;
+    if (isLengthCorrect(length)) {
+        return {
+            ...state,
+            breakLength: length
+        }
+    } else {
+        return state;
+    }
+}
+function changeSessionLength(state, val) {
+    var length = state.sessionLength + val;
+    if (isLengthCorrect(length)) {
+        return {
+            ...state,
+            sessionLength: length
+        }
+    } else {
+        return state;
+    }
+}
+
 const pomodoroReducer = (state = initState, action) => {
     switch (action.type) {
-        case SET_BREAK_LENGTH: {
-            if ((action.breakLength > 0) && (action.breakLength <= 60)) {
-                return Object.assign({}, ...state, { breakLength: action.breakLength });
-            } else {
-                return state;
-            }
+        case INCREMENT_BREAK: {
+            return changeBreakLength(+1);
         }
-        case SET_SESSION_LENGTH: {
-            if ((action.sessionLength > 0) && (action.sessionLength <= 60)) {
-                return Object.assign({}, ...state, { sessionLength: action.sessionLength });
-            } else {
-                return state;
-            }
+        case DECREMENT_BREAK: {
+            return changeBreakLength(-1);
         }
-        case SWITCH_POMODORO_STATE: {
-            if (state.pomodoroState === POMODORO_STATE_SESSION) {
-                return Object.assign({}, ...state, {
-                    pomodoroState: POMODORO_STATE_BREAK,
-                    pomodoroLastState: state.pomodoroState
-                });
-            } else if (state.pomodoroState === POMODORO_STATE_BREAK) {
-                return Object.assign({}, ...state, {
-                    pomodoroState: POMODORO_STATE_SESSION,
-                    pomodoroLastState: state.pomodoroState
-                });
-            } else {
-                return state;
-            }
+        case INCREMENT_SESSION: {
+            return changeSessionLength(+1);
         }
-        case SET_TIME_LEFT: {
-            return Object.assign({}, ...state, { timeLeft: action.timeLeft });
+        case DECREMENT_SESSION: {
+            return changeSessionLength(-1);
         }
-        case START_STOP: {
-            var pState;
-            var pLastState;
+        case START: {
             if (state.pomodoroState === POMODORO_STATE_PAUSE) {
-                pState = state.pomodoroLastState;
-                pLastState = POMODORO_STATE_PAUSE;
+                return {
+                    ...state,
+                    pomodoroState: state.pomodoroLastState,
+                    pomodoroLastState: POMODORO_STATE_PAUSE,
+                };
             } else {
-                pState = POMODORO_STATE_PAUSE;
-                pLastState = state.pomodoroState;
+                return state;
+            }
+        }
+        case STOP: {
+            if (state.pomodoroState !== POMODORO_STATE_PAUSE) {
+                return {
+                    pomodoroState: POMODORO_STATE_PAUSE,
+                    pomodoroLastState: state.pomodoroState,
+                }
+            } else {
+                return state
+            }
+        }
+        case DECREMENT_TIME: {
+            var partState;
+            if (state.timeLeft === 0) {
+                if (state.pomodoroState === POMODORO_STATE_BREAK) {
+                    partState = {
+                        pomodoroState: POMODORO_STATE_SESSION,
+                        pomodoroLastState: state.pomodoroState,
+                        timeLeft: state.sessionLength
+                    }
+                } else if (state.pomodoroState === POMODORO_STATE_SESSION) {
+                    partState = {
+                        pomodoroState: POMODORO_STATE_BREAK,
+                        pomodoroLastState: state.pomodoroState,
+                        timeLeft: state.breakLength
+                    }
+                } else {
+                    return state
+                }
+            } else {
+                partState = {
+                    timeLeft: state.timeLeft - 1
+                }
             }
 
-            return Object.assign({}, ...state, {
-                pomodoroState: pState,
-                pomodoroLastState: pLastState
-            });
+            return { ...state, ...partState };
         }
         case RESET: {
             return initState;
@@ -177,4 +214,3 @@ ReactDOM.render(
     </Provider>
     , document.getElementById('root')
 );
-
