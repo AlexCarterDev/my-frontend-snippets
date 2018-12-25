@@ -72,14 +72,18 @@ $title-height: 60px;
 }
 #session-length {
   font-family: 'Orbitron', sans-serif;
-  padding: 0 28px;
+  display: inline-block;
+  text-align: center;
+  width: 75px;
 }
 #break-label {
-  padding: 8px 20px;
+  padding: 8px 12px;
 }
 #break-length {
   font-family: 'Orbitron', sans-serif;
-  padding: 0 28px;
+  display: inline-block;
+  text-align: center;
+  width: 62px;
 }
 
 #time-container {
