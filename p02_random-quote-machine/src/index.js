@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import registerServiceWorker from './registerServiceWorker';
 import './index.scss';
 
 function getRandomHue() {
     return Math.floor(Math.random() * 360);
 }
+
+var quotes;
 
 class Text extends React.Component {
     render() {
@@ -94,8 +95,8 @@ class QuoteBox extends React.Component {
             btnBackground: 'white'
         }
         this.updateQuote = this.updateQuote.bind(this);
-        this.getRandomQuoteFromApi = this.getRandomQuoteFromApi.bind(this);
         this.randomizeColors = this.randomizeColors.bind(this);
+        this.getRandomQuotes = this.getRandomQuotes.bind(this);
     }
     updateQuote(text,author) {
         console.log('quote-box updateQuote');
@@ -104,20 +105,33 @@ class QuoteBox extends React.Component {
             author: author,
         });
     }
-    getRandomQuoteFromApi() {
-        console.log('quote-box getRandomQuoteFromApi');
-        this.randomizeColors();
-        return fetch('https://talaikis.com/api/quotes/random/')
+  
+    getRandomQuote() {
+      return quotes[Math.floor(Math.random()*quotes.length)];
+    }
+    getRandomQuotes() {
+      this.randomizeColors();
+      if (typeof quotes !== 'undefined') {
+        var quote = this.getRandomQuote();
+        this.updateQuote(quote.author, quote.quote);
+      } else {
+        fetch('https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json')
             .then((response) => response.json())
             .then((json) => {
-                this.updateQuote(json.quote, json.author);
-            }).catch((error) => {
-                console.error(error);
-            });
+              quotes = json.quotes;
+              var quote = this.getRandomQuote();
+              console.log('Quotes: ', quote.author);
+              this.updateQuote(quote.author, quote.quote);
+            })
+            .catch((error) => {
+              console.error(error);
+            })
+      }
     }
     componentDidMount() {
         console.log('quote-box componentDidMount');        
-        this.getRandomQuoteFromApi();
+        this.getRandomQuotes();
+      
     }
     
     randomizeColors() {
@@ -138,11 +152,11 @@ class QuoteBox extends React.Component {
                 <Separator/>
                 <Author author={this.state.author}/>
                 <Buttons text={this.state.text} author={this.state.author}
-                    randomQuote={this.getRandomQuoteFromApi} btnBackground={this.state.btnBackground}/>
+                    randomQuote={this.getRandomQuotes} btnBackground={this.state.btnBackground}/>
             </div>
         );
     }
 }
 
+
 ReactDOM.render(<QuoteBox />, document.getElementById('root'));
-registerServiceWorker();
